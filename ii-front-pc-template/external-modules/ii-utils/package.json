@@ -1,0 +1,21 @@
+{
+  "name": "ii-utils",
+  "version": "1.0.0",
+  "description": "common utils",
+  "main": "index.js",
+  "repository": "ssh://git@code.ii-ai.tech:2222/ued/ii-utils.git",
+  "author": "Jackson Liu <416883813@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dayjs": "^1.8.12",
+    "js-cookies": "^1.0.4",
+    "ramda": "^0.26.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0"
+  }
+}

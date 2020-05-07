@@ -1,0 +1,29 @@
+{
+  "name": "ii-ui",
+  "version": "0.0.1",
+  "title": "ii-ui",
+  "description": "ui component based on antd",
+  "contributors": [
+    "shizai"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://code.ii-ai.tech/ued/ii-ui"
+  },
+  "scripts": {
+    "pre-publish": "mkdir -p lib_temp && ./node_modules/.bin/babel ./es6 --out-dir ./lib_temp && cp -rf ./es6/* ./lib && cp -rf ./lib_temp/* ./lib && rm -rf lib_temp && rm ./lib/**/*.jsx"
+  },
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "dependencies": {
+    "react-router-breadcrumbs-hoc": "^3.1.1"
+  },
+  "devDependencies": {
+    "antd": "^3.16.1",
+    "react": "^16.8.6",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0"
+  }
+}

@@ -1,0 +1,51 @@
+.dl-logo {
+  margin-left: 40px;
+  height: 100%;
+  align-items: center;
+
+  img {
+    height: 44px;
+    width: 44px;
+  }
+
+  .logo-text {
+    margin-left: 12px;
+    span:first-of-type {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    span:last-of-type {
+      color: #8399B0;
+    }
+  }
+}
+
+.ant-layout-sider-collapsed {
+  .dl-logo {
+    justify-content: center;
+    margin-left: 0;
+    .logo-text {
+      display: none;
+    }
+  }
+}
+
+.main-content {
+  height: calc(100% - 28px - 20px);
+  width: 100%;
+  padding: 10px 20px;
+  background: white;
+  overflow: scroll;
+
+  .content-title-bar {
+    margin-bottom: 20px;
+    height: 32px;
+  }
+
+  .info-title {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}

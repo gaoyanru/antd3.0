@@ -1,0 +1,9 @@
+[submodule "src/pages/ii-umi-block-table"]
+	path = src/pages/ii-umi-block-table
+	url = ssh://git@code.ii-ai.tech:2222/ued/ii-umi-block-table.git
+[submodule "external-modules/ii-ui"]
+	path = external-modules/ii-ui
+	url = https://code.ii-ai.tech/ued/ii-ui.git
+[submodule "external-modules/ii-utils"]
+	path = external-modules/ii-utils
+	url = https://code.ii-ai.tech/ued/ii-utils.git

@@ -1,0 +1,31 @@
+// 去除chrome浏览器的自动填充背景色
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.ii-ui-input-addon {
+  position: absolute;
+  border: none;
+  background: transparent;
+  right: 10px;
+  bottom: 1px;
+  width: auto;
+  line-height: 32px;
+  font-size: 14px;
+  z-index: 2;
+  color: rgba(#000, .25);
+
+  & + input {
+    padding-right: 50px;
+  }
+}
+.ii-ui-input  {
+  position: relative;
+
+  textarea {
+    resize: none;
+  }
+}

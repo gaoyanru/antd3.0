@@ -1,0 +1,12 @@
+{
+  "parser": "babel-eslint",
+  "extends": "eslint-config-umi",
+  "globals": {
+    "__CDN_PREFIX__": true,
+    "__SAAS_API_PREFIX__": true,
+    "__USER_CENTER__": true,
+    "__API_PREFIX__": true,
+    "log": true,
+    "noop": true
+  }
+}

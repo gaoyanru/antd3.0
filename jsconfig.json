@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+     "target": "ES6",
+     "experimentalDecorators": true,
+     "allowSyntheticDefaultImports": true,
+     "jsx": "react",
+     "module": "commonjs",
+     "baseUrl": "./",
+     "paths": {
+        "src": ["./src"],
+        "config": ["./config"],
+        "ii-utils": ["./external-modules/ii-utils"],
+        "ii-ui": ["./external-modules/ii-ui/es6"]
+     },
+     "allowJs": true
+ },
+ "jsx": "react",
+ "modules": "commonjs",
+ "exclude": [
+   "node_modules",
+   "dist"
+ ]
+}

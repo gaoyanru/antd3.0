@@ -1,0 +1,21 @@
+version: "3.5"
+services:
+    pc-template-local:
+      build:
+        context: .
+      working_dir: /app
+      tty: true
+      stdin_open: true
+      environment:
+        - TZ=Asia/Shanghai
+        - LANG=C.UTF-8
+      ports:
+        - 9090:8080
+      restart: always
+      deploy: # deploy下的配置,仅集群下生效
+        mode: replicated # 副本模式
+        replicas: 1 # 部署几个容器实例
+        placement:
+          constraints: # 部署节点限制
+            - node.labels.roles == common # 此配置限制部署节点必须是demo节点
+

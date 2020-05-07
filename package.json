@@ -1,0 +1,49 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "./node_modules/.bin/cross-env RUNTIME_ENV=development umi dev",
+    "build-prod": "./node_modules/.bin/cross-env RUNTIME_ENV=production umi build",
+    "build-local": "./node_modules/.bin/cross-env RUNTIME_ENV=development umi build",
+    "build-docker-prod": "yarn run build-prod && cp -r ./dist ./docker/ && docker-compose -f ./docker/docker-compose-prod.yml build && rm -rf ./docker/dist",
+    "build-docker-local": "yarn run build-local && cp -r ./dist ./docker/ && docker-compose -f ./docker/docker-compose-local.yml up -d --no-deps --build && rm -rf ./docker/dist",
+    "run-docker-local": "docker-compose -f ./docker/docker-compose-local.yml up -d",
+    "test": "umi test",
+    "lint": "eslint --ext .js src",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "antd": "^3.12.1",
+    "axios": "^0.18.0",
+    "cross-env": "^5.2.0",
+    "dayjs": "^1.8.12",
+    "dva": "^2.5.0-beta.2",
+    "js-cookie": "^2.2.0",
+    "ramda": "^0.26.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-router-breadcrumbs-hoc": "^3.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.4.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "react-test-renderer": "^16.7.0",
+    "umi": "^2.4.2",
+    "umi-plugin-react": "^1.7.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
