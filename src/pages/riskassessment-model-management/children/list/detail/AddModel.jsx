@@ -41,12 +41,12 @@ const EditableCell = (form) => (props) => {
 
 let tempIndex = 0
 
-const CalculationFactor = (props) => {
+const AddModel = (props) => {
   // const [form] = Form.useForm()
   const initData = [
-    {key: '1', id: '1', name: '1111', age: '11', address: '1111111'},
-    {key: '2', id: '2', name: '2222', age: '12', address: '222222'},
-    {key: '3', id: '3', name: '3333', age: '13', address: '33333'}
+    {key: '1', id: '1', name: '1111', age: '11', address: '1111111', time: ''},
+    {key: '2', id: '2', name: '2222', age: '12', address: '222222', time: ''},
+    {key: '3', id: '3', name: '3333', age: '13', address: '33333', time: ''}
   ]
   const { form } = props
   const [editingKey, setEditingKey] = useState('')
@@ -63,7 +63,7 @@ const CalculationFactor = (props) => {
         )
       }
     }, {
-      title: '计算因子',
+      title: '算法名称',
       dataIndex: 'name',
       editable: true,
     }, {
@@ -71,7 +71,7 @@ const CalculationFactor = (props) => {
       dataIndex: 'age',
       editable: true,
     }, {
-      title: '取值范围',
+      title: '计算因子',
       dataIndex: 'address',
       editable: true,
     }, {
@@ -160,7 +160,7 @@ const CalculationFactor = (props) => {
   return (
     <div className='calculation-factor'>
       <div className='top'>
-        <div className='table-title'>计算因子</div>
+        <div className='table-title'>算法</div>
         <Button className='button' type='primary' onClick={() => handleAdd()}>添加</Button>
       </div>
       <Form form={form}>
@@ -183,4 +183,4 @@ const CalculationFactor = (props) => {
     </div>
   )
 }
-export default Form.create()(CalculationFactor)
+export default Form.create()(AddModel)

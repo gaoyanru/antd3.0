@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Form, Input, Select } from 'ii-ui'
 import CalculationFactor from './CalculationFactor'
+import AddModel from './AddModel'
 
 import './index.less'
 
@@ -52,6 +53,7 @@ const riskModelDetail = (props) => {
           </FormItem>
         </Form>
         <CalculationFactor></CalculationFactor>
+        <AddModel></AddModel>
       </div>
     </div>
   )
