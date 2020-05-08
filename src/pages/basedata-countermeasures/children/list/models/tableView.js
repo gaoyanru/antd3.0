@@ -31,8 +31,11 @@ export default {
       yield put({ type: 'setModelsList', payload: { total: totalCount, currentItems }})
     },
     *fetchDetail({ payload: id }, {call, put}) {
-      console.log(id, 'id')
       const detail = yield call(service.fetchBasedataModelDetail, id)
+      yield put({ type: 'setDetail', payload: { detail }})
+    },
+    *clearDetail(_, {call, put}) {
+      const detail = {}
       yield put({ type: 'setDetail', payload: { detail }})
     },
     *createItem({payload}, { call, put }) {

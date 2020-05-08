@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Table, Input, Button } from 'ii-ui'
+import { Input, Button } from 'ii-ui'
 import { connect } from 'dva'
 import ProjectTable from './ProjectTable'
 import Detail from './Detail'
-import { router } from 'umi'
 import './index.less'
 
 const { Search } = Input
@@ -72,6 +71,5 @@ const mapState = state => {
 }
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchList: (params = {}) => dispatch({ type: `${TABLE_NAME_SPACE}/fetchBasedataModelList`, payload: params }),
-  // fetchConfigStoreList: () => dispatch({ type: `${TABLE_NAME_SPACE}/fetchConfigStoreList`})
 })
 export default connect(mapState, mapDispatchToProps)(BasedataModellist)

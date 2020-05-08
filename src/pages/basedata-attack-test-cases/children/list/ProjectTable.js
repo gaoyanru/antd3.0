@@ -3,7 +3,16 @@ import { connect } from 'dva'
 
 const TABLE_NAME_SPACE = 'TestCasesTableView'
 
-const createColumns = () => [
+const confirmDelete = ({ dispatch, id }) => Modal.confirm({
+  title: '确认删除',
+  content: '确认该条数据吗？',
+  onOk: async () => {
+    await dispatch({ type: `${TABLE_NAME_SPACE}/updateItem`, payload: {is_deleted: true, attack_test_case_id: id} })
+    await dispatch({ type: `${TABLE_NAME_SPACE}/fetchTestCasesList`, payload: {page: 1, size: 10} })
+  }
+})
+
+const createColumns = (showModal, dispatch) => [
   {
     title: '序号',
     render: (text, record, index) => {
@@ -32,13 +41,11 @@ const createColumns = () => [
 		title: '操作',
     key: 'edit',
 		render: (record) => {
-      // const { storeId } = record
+      const { attack_test_case_id: id } = record
 			return (
 				<div className='item-actions'>
-          <span className='span-btn'>编辑</span>
-          <span className='span-btn'>删除</span>
-					{/* <span className='span-btn' onClick={() => confirmDelete({ dispatch, storeId})}>删除</span> */}
-          {/* <span className='span-btn' onClick={() => confirmDelete({ dispatch, storeId})}>删除</span> */}
+          <span className='span-btn' onClick={() => showModal(id)}>编辑</span>
+          <span className='span-btn' onClick={() => confirmDelete({dispatch, id})}>删除</span>
         </div>
 			)
 		}
@@ -47,8 +54,8 @@ const createColumns = () => [
 
 const ItemTable = (props) => {
   // log(props, 'propsStore')
-  const { currentItems, page = 1, total, fetchList, tableLoading, size } = props
-  console.log(props, 'props')
+  const { currentItems, page = 1, total, fetchList, tableLoading, size, showModal, dispatch } = props
+
   const pageSizeOptions = ['10', '20']
 	const pagination = {
     current: page,
@@ -73,7 +80,7 @@ const ItemTable = (props) => {
       loading={tableLoading}
       rowKey={record => record.attack_test_case_id}
       dataSource={currentItems}
-      columns={createColumns()}
+      columns={createColumns(showModal, dispatch)}
     />
 	)
 }

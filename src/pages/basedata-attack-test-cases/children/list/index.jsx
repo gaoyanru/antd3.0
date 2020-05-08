@@ -1,35 +1,19 @@
 import { useState, useEffect } from 'react'
-import { Table, Input, Button } from 'ii-ui'
+import { Input, Button } from 'ii-ui'
 import { connect } from 'dva'
 import ProjectTable from './ProjectTable'
-import { router } from 'umi'
+import Detail from './Detail'
 import './index.less'
 
 const { Search } = Input
 const TABLE_NAME_SPACE = 'TestCasesTableView'
-// const FilterGroup = Table.FilterGroup
-
-// const options = [
-//   {
-//     field: 'searchWord',
-//     InputOption: (props) => <Input
-//       {...props}
-//       placeholder='输入店铺名称/描述'
-//       style={{ width: 350 }}
-//     />
-//   }
-// ]
 
 const BasedataModellist = (props) => {
   const { fetchList } = props
   const [keywords, setKeywords] = useState()
+  const [visible, setVisible] = useState(false)
+  const [currentId, setCurrentId] = useState()
   const [params, setParams] = useState({page: 1, size: 10})
-  // const [params] = useState({currentPage: 1})
-  // const { currentPage = 1, searchWord } = params
-
-  // useEffect(() => {
-  //   fetchConfigStoreList()
-  // }, [])
 
   useEffect(() => {
     fetchList({...params, keywords})
@@ -44,17 +28,38 @@ const BasedataModellist = (props) => {
             onSearch={value => setKeywords(value)}
             style={{ width: 350 }}
           />
-          <Button className='button' type='primary' onClick={() => {}}>添加测试用例</Button>
+          <Button
+            className='button'
+            type='primary'
+            onClick={() => {
+              setCurrentId(0)
+              setVisible(true)
+            }}
+          >
+            添加测试用例
+          </Button>
         </div>
         <ProjectTable
           size={params.size}
           page={params.page}
+          showModal={(currentid) => {
+            setCurrentId(currentid)
+            setVisible(true)
+          }}
           fetchList={data => {
             setParams({...data})
             fetchList({...data, keywords})
           }}
         />
       </div>
+      {
+        visible &&
+        <Detail
+          id={currentId}
+          visible={visible}
+          onCancel={() => setVisible(false)}
+        />
+      }
     </div>
   )
 }
@@ -66,6 +71,5 @@ const mapState = state => {
 }
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchList: (params = {}) => dispatch({ type: `${TABLE_NAME_SPACE}/fetchTestCasesList`, payload: params }),
-  // fetchConfigStoreList: () => dispatch({ type: `${TABLE_NAME_SPACE}/fetchConfigStoreList`})
 })
 export default connect(mapState, mapDispatchToProps)(BasedataModellist)

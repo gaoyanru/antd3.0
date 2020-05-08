@@ -11,3 +11,9 @@ export const updateBasedataModel = (params) => request.put('/ra-basedata-counter
 export const fetchBasedataModelDetail = ({id}) => request.get(`/ra-basedata-countermeasures/${id}`)
 // 测试用例列表页
 export const fetchTestCasesList = ({keywords, page, size}) => request.get(`/ra-basedata-attack-test-cases?keywords=${keywords}&page=${page}&size=${size}`)
+// 测试用例新增
+export const addTestCasesModel = (params) => request.post(`/ra-basedata-attack-test-cases`, params)
+// 测试用例修改及删除
+export const updateTestCasesModel = (params) => request.put('/ra-basedata-attack-test-cases', params)
+// 测试用例详情获取
+export const fetchTestCasesDetail = ({id}) => request.get(`/ra-basedata-attack-test-cases/${id}`)
