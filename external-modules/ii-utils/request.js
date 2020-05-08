@@ -110,6 +110,7 @@ const createRequestMethod = (method = 'get', config = {}) => async (url = '', da
 export default {
   get: createRequestMethod('get'),
   post: createRequestMethod('post'),
+  put: createRequestMethod('put'),
   delete: createRequestMethod('delete'),
 }
 

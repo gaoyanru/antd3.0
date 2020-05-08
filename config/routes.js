@@ -32,6 +32,32 @@ const routes = [{
           name: '添加模型',
           component: './riskassessment-model-management/children/list/detail'
         }]
+      }, {
+        path: '/basedata-countermeasures',
+        icon: 'iconshunxu',
+        name: '缓解措施',
+        isMenuItem: true,
+        routes: [{
+          path: '/basedata-countermeasures',
+          redirect: '/basedata-countermeasures/list',
+          exact: true
+        }, {
+          path: '/basedata-countermeasures/list',
+          component: './basedata-countermeasures/children/list'
+        }]
+      }, {
+        path: '/basedata-attack-test-cases',
+        icon: 'iconshunxu',
+        name: '攻击路径库',
+        isMenuItem: true,
+        routes: [{
+          path: '/basedata-attack-test-cases',
+          redirect: '/basedata-attack-test-cases/list',
+          exact: true
+        }, {
+          path: '/basedata-attack-test-cases/list',
+          component: './basedata-attack-test-cases/children/list'
+        }]
       }
     ]
   },
