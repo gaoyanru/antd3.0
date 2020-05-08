@@ -17,3 +17,19 @@ export const addTestCasesModel = (params) => request.post(`/ra-basedata-attack-t
 export const updateTestCasesModel = (params) => request.put('/ra-basedata-attack-test-cases', params)
 // 测试用例详情获取
 export const fetchTestCasesDetail = ({id}) => request.get(`/ra-basedata-attack-test-cases/${id}`)
+// 一级脆弱性列表页
+export const fetchVulnerabilityFirstList = ({keywords, page, size}) => request.get(`/ra-basedata-vulnerability-firsts?keywords=${keywords}&page=${page}&size=${size}`)
+// 一级脆弱性新增
+export const addVulnerabilityFirst = (params) => request.post(`/ra-basedata-vulnerability-firsts`, params)
+// 一级脆弱性修改及删除
+export const updateVulnerabilityFirst = (params) => request.put('/ra-basedata-vulnerability-firsts', params)
+// 一级脆弱性详情获取
+export const fetchVulnerabilityFirstDetail = ({id}) => request.get(`/ra-basedata-vulnerability-firsts/${id}`)
+// 二级级脆弱性列表页
+export const fetchVulnerabilitySecondList = ({keywords, page, size, vulnerabilityFirstsId}) => request.get(`/ra-basedata-vulnerability-seconds?keywords=${keywords}&page=${page}&size=${size}&vulnerabilityFirstsId=${vulnerabilityFirstsId}`)
+// 二级脆弱性新增
+export const addVulnerabilitySecond = (params) => request.post(`/ra-basedata-vulnerability-seconds`, params)
+// 二级脆弱性修改及删除
+export const updateVulnerabilitySecond = (params) => request.put('/ra-basedata-vulnerability-seconds', params)
+// 二级脆弱性详情获取
+export const fetchVulnerabilitySecondDetail = ({id}) => request.get(`/ra-basedata-vulnerability-seconds/${id}`)

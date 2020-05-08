@@ -58,6 +58,22 @@ const routes = [{
           path: '/basedata-attack-test-cases/list',
           component: './basedata-attack-test-cases/children/list'
         }]
+      }, {
+        path: '/basedata-vulnerability',
+        icon: 'iconshunxu',
+        name: '脆弱性基础库',
+        isMenuItem: true,
+        routes: [{
+          path: '/basedata-vulnerability',
+          redirect: '/basedata-vulnerability/list',
+          exact: true
+        }, {
+          path: '/basedata-vulnerability/list',
+          component: './basedata-vulnerability/children'
+        }, {
+          path: '/basedata-vulnerability/list/:type?',
+          component: './basedata-vulnerability/children'
+        }]
       }
     ]
   },
