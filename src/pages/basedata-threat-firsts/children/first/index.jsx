@@ -6,7 +6,7 @@ import Detail from './Detail'
 import './index.less'
 
 const { Search } = Input
-const TABLE_NAME_SPACE = 'VulnerabilityFirstTableView'
+const TABLE_NAME_SPACE = 'BasedataThreatFirstTableView'
 
 const First = (props) => {
   const { fetchList } = props

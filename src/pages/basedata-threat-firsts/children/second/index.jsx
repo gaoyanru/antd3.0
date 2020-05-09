@@ -6,7 +6,7 @@ import Detail from './Detail'
 import './index.less'
 
 const { Search } = Input
-const TABLE_NAME_SPACE = 'VulnerabilitySecondTableView'
+const TABLE_NAME_SPACE = 'BasedataThreatSecondTableView'
 
 const Second = (props) => {
   const { fetchList, allFirstList, fetchListFirst } = props
@@ -20,24 +20,25 @@ const Second = (props) => {
     fetchListFirst({page: 1, size: 100})
   }, [])
   useEffect(() => {
-    fetchList({...params, keywords, vulnerabilityFirstsId: firstId})
+    console.log(firstId, 'firstId')
+    fetchList({...params, keywords, threadFirstsId: firstId})
   }, [keywords, firstId]) 
   return (
     <div className='table-con'>
       <div className='table-header'>
         <div>
-          <Select placeholder='请选择一级脆弱性名称' onChange={value => setFirstId(value)} style={{ width: 200, marginRight: 10 }}>
+          <Select placeholder='请选择一级威胁性名称' onChange={value => setFirstId(value)} style={{ width: 200, marginRight: 10 }}>
             {
               allFirstList.length > 0 && allFirstList.map((item) => {
                 return (
-                  <Select.Option key={item.vulnerability_firsts_id} value={item.vulnerability_firsts_id}>{item.vulnerability_firsts_name}</Select.Option>
+                  <Select.Option key={item.threat_firsts_id} value={item.threat_firsts_id}>{item.threat_firsts_name}</Select.Option>
                 )
               })
             }
             
           </Select>
           <Search
-            placeholder='请输入二级脆弱性名称'
+            placeholder='请输入二级威胁性名称'
             onSearch={value => setKeywords(value)}
             style={{ width: 350 }}
           />
@@ -50,7 +51,7 @@ const Second = (props) => {
             setVisible(true)
           }}
         >
-          添加脆弱性
+          添加威胁
         </Button>
       </div>
       <ProjectTable

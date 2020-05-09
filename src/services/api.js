@@ -1,6 +1,7 @@
 import request from 'ii-utils/request'
 // 风评模型管理列表
 export const fetchModelsList = ({keywords, page, size}) => request.get(`/ra-basedata-model-algorithms?keywords=${keywords}&page=${page}&size=${size}`)
+
 // 缓解措施库列表
 export const fetchBasedataModelList = ({keywords, page, size}) => request.get(`/ra-basedata-countermeasures?keywords=${keywords}&page=${page}&size=${size}`)
 // 缓解措施新增
@@ -9,6 +10,7 @@ export const addBasedataModel = (params) => request.post(`/ra-basedata-counterme
 export const updateBasedataModel = (params) => request.put('/ra-basedata-countermeasures', params)
 // 缓解措施详情获取
 export const fetchBasedataModelDetail = ({id}) => request.get(`/ra-basedata-countermeasures/${id}`)
+
 // 测试用例列表页
 export const fetchTestCasesList = ({keywords, page, size}) => request.get(`/ra-basedata-attack-test-cases?keywords=${keywords}&page=${page}&size=${size}`)
 // 测试用例新增
@@ -17,6 +19,7 @@ export const addTestCasesModel = (params) => request.post(`/ra-basedata-attack-t
 export const updateTestCasesModel = (params) => request.put('/ra-basedata-attack-test-cases', params)
 // 测试用例详情获取
 export const fetchTestCasesDetail = ({id}) => request.get(`/ra-basedata-attack-test-cases/${id}`)
+
 // 一级脆弱性列表页
 export const fetchVulnerabilityFirstList = ({keywords, page, size}) => request.get(`/ra-basedata-vulnerability-firsts?keywords=${keywords}&page=${page}&size=${size}`)
 // 一级脆弱性新增
@@ -33,3 +36,20 @@ export const addVulnerabilitySecond = (params) => request.post(`/ra-basedata-vul
 export const updateVulnerabilitySecond = (params) => request.put('/ra-basedata-vulnerability-seconds', params)
 // 二级脆弱性详情获取
 export const fetchVulnerabilitySecondDetail = ({id}) => request.get(`/ra-basedata-vulnerability-seconds/${id}`)
+
+// 一级脆弱性列表页
+export const fetchBasedataThreatFirstList = ({keywords, page, size}) => request.get(`/ra-basedata-threat-firsts?keywords=${keywords}&page=${page}&size=${size}`)
+// 一级脆弱性新增
+export const addBasedataThreatFirst = (params) => request.post(`/ra-basedata-threat-firsts`, params)
+// 一级脆弱性修改及删除
+export const updateBasedataThreatFirst = (params) => request.put('/ra-basedata-threat-firsts', params)
+// 一级脆弱性详情获取
+export const fetchBasedataThreatFirstDetail = ({id}) => request.get(`/ra-basedata-threat-firsts/${id}`)
+// 二级级脆弱性列表页
+export const fetchBasedataThreatSecondList = ({keywords, page, size, threadFirstsId}) => request.get(`/ra-basedata-threat-seconds?keywords=${keywords}&page=${page}&size=${size}&threadFirstsId=${threadFirstsId}`)
+// 二级脆弱性新增
+export const addBasedataThreatSecond = (params) => request.post(`/ra-basedata-threat-seconds`, params)
+// 二级脆弱性修改及删除
+export const updateBasedataThreatSecond = (params) => request.put('/ra-basedata-threat-seconds', params)
+// 二级脆弱性详情获取
+export const fetchBasedataThreatSecondDetail = ({id}) => request.get(`/ra-basedata-threat-seconds/${id}`)

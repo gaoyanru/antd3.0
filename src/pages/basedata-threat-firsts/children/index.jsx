@@ -1,4 +1,3 @@
-import { connect } from 'dva'
 import { Tabs } from 'ii-ui'
 import './index.less'
 import First from './first'
@@ -6,7 +5,7 @@ import Second from './second'
 
 const TabPane = Tabs.TabPane
 
-const BasedataThreatFirstsList = (props) => {
+const BasedataThreatList = (props) => {
   const { type = '' } = props.match.params
   return (
     <div className='basedata-vulnerability'>
@@ -25,9 +24,4 @@ const BasedataThreatFirstsList = (props) => {
   )
 }
 
-const mapState = state => {
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-})
-export default connect(mapState, mapDispatchToProps)(BasedataThreatFirstsList)
+export default BasedataThreatList

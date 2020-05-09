@@ -4,18 +4,12 @@ import { connect } from 'dva'
 import './index.less'
 import { useEffect } from 'react';
 
-const TABLE_NAME_SPACE = 'VulnerabilitySecondTableView'
-
-const LEVELS = [
-  {id: 'LOW', name: '低'},
-  {id: 'MEDIUM', name: '中'},
-  {id: 'HIGH', name: '高'},
-]
+const TABLE_NAME_SPACE = 'BasedataThreatSecondTableView'
 
 const ModalDetail = (props) => {
   const { visible, onCancel, id, form, fetchList, updateItem, createItem, detail, fetchDetail, clearDetail, firstList = [] } = props
   const { getFieldDecorator, getFieldsValue,  validateFields } = form
-  const { vulnerability_seconds_name, vulnerability_seconds_desc, vulnerability_seconds_code, vulnerability_firsts_id, vulnerability_seconds_level } = getFieldsValue()
+  const { threat_seconds_name, threat_seconds_code, threat_firsts_id, threat_seconds_desc } = getFieldsValue()
 
   useEffect(() => {
     id ? fetchDetail(id) : clearDetail()
@@ -31,7 +25,7 @@ const ModalDetail = (props) => {
       onCancel()
       fetchList({page: 1, size: 10})
     })
-  }, [ vulnerability_seconds_name, vulnerability_seconds_desc, vulnerability_seconds_code, vulnerability_firsts_id, vulnerability_seconds_level])
+  }, [ threat_seconds_name, threat_seconds_code, threat_firsts_id, threat_seconds_desc])
   
 	const handleCancel = () => {
 		onCancel()
@@ -58,8 +52,8 @@ const ModalDetail = (props) => {
         <Form.Item
           label='威胁名称'
         >
-          {getFieldDecorator('vulnerability_seconds_name', {
-            initialValue: detail.vulnerability_seconds_name,
+          {getFieldDecorator('threat_seconds_name', {
+            initialValue: detail.threat_seconds_name,
             rules: [
               { required: true, message: '请输入威胁名称' }
             ]
@@ -70,8 +64,8 @@ const ModalDetail = (props) => {
         <Form.Item
           label='威胁编号'
         >
-          {getFieldDecorator('vulnerability_seconds_code', {
-            initialValue: detail.vulnerability_seconds_code,
+          {getFieldDecorator('threat_seconds_code', {
+            initialValue: detail.threat_seconds_code,
             rules: [{
               required: true,
               message: '请输入威胁编号',
@@ -81,42 +75,20 @@ const ModalDetail = (props) => {
           )}
         </Form.Item>
         <Form.Item
-          label='脆弱性等级'
+          label='一级威胁性'
         >
-          {getFieldDecorator('vulnerability_seconds_level', {
-            initialValue: detail.vulnerability_seconds_level,
+          {getFieldDecorator('threat_type_id', {
+            initialValue: detail.threat_type_id,
             rules: [{
               required: true,
-              message: '请选择脆弱性等级',
+              message: '请选择一级威胁性',
             }]
           })(
-            <Select placeholder='请选择脆弱性等级'>
-              {
-                LEVELS.map((item) => {
-                  return (
-                    <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
-                  )
-                })
-              }
-              
-            </Select>
-          )}
-        </Form.Item>
-        <Form.Item
-          label='一级脆弱性'
-        >
-          {getFieldDecorator('vulnerability_firsts_id', {
-            initialValue: detail.vulnerability_firsts_id,
-            rules: [{
-              required: true,
-              message: '请选择一级脆弱性',
-            }]
-          })(
-            <Select placeholder='请选择一级脆弱性'>
+            <Select placeholder='请选择一级威胁性'>
               {
                 firstList.length > 0 && firstList.map((item) => {
                   return (
-                    <Select.Option key={item.vulnerability_firsts_id} value={item.vulnerability_firsts_id}>{item.vulnerability_firsts_name}</Select.Option>
+                    <Select.Option key={item.threat_firsts_id} value={item.threat_firsts_id}>{item.threat_firsts_name}</Select.Option>
                   )
                 })
               }
@@ -127,8 +99,8 @@ const ModalDetail = (props) => {
         <Form.Item
           label="威胁描述"
         >
-          {getFieldDecorator('vulnerability_seconds_desc', {
-            initialValue: detail.vulnerability_seconds_desc,
+          {getFieldDecorator('threat_seconds_desc', {
+            initialValue: detail.threat_seconds_desc,
             rules: [{
               required: true,
               message: '请输入威胁描述',

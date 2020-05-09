@@ -1,6 +1,6 @@
 import * as service from 'src/services/api'
 import { Message } from 'ii-ui'
-const TABLE_NAME_SPACE = 'VulnerabilitySecondTableView'
+const TABLE_NAME_SPACE = 'BasedataThreatSecondTableView'
 
 export default {
   namespace: TABLE_NAME_SPACE,
@@ -34,19 +34,19 @@ export default {
     }
   },
   effects: {
-    *fetchList({ payload: { page = 1, size = 20, keywords = '', vulnerabilityFirstsId = '' }}, { call, put }) {
-      const modelsList = yield call(service.fetchVulnerabilitySecondList, { page, size, keywords, vulnerabilityFirstsId })
+    *fetchList({ payload: { page = 1, size = 20, keywords = '', threadFirstsId = '' }}, { call, put }) {
+      const modelsList = yield call(service.fetchBasedataThreatSecondList, { page, size, keywords, threadFirstsId })
       const { totalCount, datas: currentItems = [] } = modelsList || {}
       yield put({ type: 'setModelsList', payload: { total: totalCount, currentItems }})
     },
     *fetchListFirst({ payload: { page = 1, size = 20, keywords = '' }}, { call, put }) {
-      const modelsList = yield call(service.fetchVulnerabilityFirstList, { page, size, keywords })
+      const modelsList = yield call(service.fetchBasedataThreatFirstList, { page, size, keywords })
       const { datas: firstList = [] } = modelsList || {}
-      const allFirstList = [{vulnerability_firsts_id: '', vulnerability_firsts_name: '全部'}].concat(firstList)
+      const allFirstList = [{threat_firsts_id: '', threat_firsts_name: '全部'}].concat(firstList)
       yield put({ type: 'setFirstList', payload: { firstList, allFirstList }})
     },
     *fetchDetail({ payload: id }, {call, put}) {
-      const detail = yield call(service.fetchVulnerabilitySecondDetail, id)
+      const detail = yield call(service.fetchBasedataThreatSecondDetail, id)
       yield put({ type: 'setDetail', payload: { detail }})
     },
     *clearDetail(_, {call, put}) {
@@ -54,11 +54,11 @@ export default {
       yield put({ type: 'setDetail', payload: { detail }})
     },
     *createItem({payload}, { call, put }) {
-      yield call(service.addVulnerabilitySecond, payload)
+      yield call(service.addBasedataThreatSecond, payload)
       Message.success('操作成功')
     },
     *updateItem({payload}, { call, put }) {
-      yield call(service.updateVulnerabilitySecond, payload)
+      yield call(service.updateBasedataThreatSecond, payload)
       Message.success('操作成功')
     }
   }

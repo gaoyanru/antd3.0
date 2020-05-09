@@ -2,13 +2,13 @@ import { Table, Modal } from 'ii-ui'
 import { connect } from 'dva'
 import moment from 'moment'
 
-const TABLE_NAME_SPACE = 'VulnerabilitySecondTableView'
+const TABLE_NAME_SPACE = 'BasedataThreatSecondTableView'
 
-const confirmDelete = ({ dispatch, id, vulnerability_firsts_id }) => Modal.confirm({
+const confirmDelete = ({ dispatch, id, threat_type_id }) => Modal.confirm({
   title: '确认删除',
   content: '确认该条数据吗？',
   onOk: async () => {
-    await dispatch({ type: `${TABLE_NAME_SPACE}/updateItem`, payload: {is_deleted: true, vulnerability_seconds_id: id, vulnerability_firsts_id} })
+    await dispatch({ type: `${TABLE_NAME_SPACE}/updateItem`, payload: {is_deleted: true, threat_seconds_id: id, threat_type_id} })
     await dispatch({ type: `${TABLE_NAME_SPACE}/fetchList`, payload: {page: 1, size: 10} })
   }
 })
@@ -23,24 +23,20 @@ const createColumns = (showModal, dispatch) => [
     }
 	},
   {
-    title: '二级脆弱性编号',
-    dataIndex: 'vulnerability_seconds_code'
+    title: '二级威胁性编号',
+    dataIndex: 'threat_seconds_code'
 	},
 	{
-    title: '二级脆弱性名称',
-    dataIndex: 'vulnerability_seconds_name'
+    title: '二级威胁性名称',
+    dataIndex: 'threat_seconds_name'
   },
-  {
-    title: '脆弱性等级',
-    dataIndex: 'vulnerability_seconds_level'
-	},
 	{
-    title: '一级脆弱性名称',
-    dataIndex: 'vulnerability_firsts_name'
+    title: '一级威胁性名称',
+    dataIndex: 'threat_firsts_name'
   },
   {
     title: '描述',
-    dataIndex: 'vulnerability_seconds_desc'
+    dataIndex: 'threat_seconds_desc'
   },
   {
     title: '创建时间',
@@ -55,11 +51,11 @@ const createColumns = (showModal, dispatch) => [
 		title: '操作',
     key: 'edit',
 		render: (record) => {
-      const { vulnerability_seconds_id: id, vulnerability_firsts_id } = record
+      const { threat_seconds_id: id, threat_type_id } = record
 			return (
 				<div className='item-actions'>
           <span className='span-btn' onClick={() => showModal(id)}>编辑</span>
-          <span className='span-btn' onClick={() => confirmDelete({dispatch, id, vulnerability_firsts_id})}>删除</span>
+          <span className='span-btn' onClick={() => confirmDelete({dispatch, id, threat_type_id})}>删除</span>
         </div>
 			)
 		}
@@ -93,7 +89,7 @@ const ItemTable = (props) => {
     <Table
       pagination={pagination}
       loading={tableLoading}
-      rowKey={record => record.vulnerability_seconds_id}
+      rowKey={record => record.threat_seconds_id}
       dataSource={currentItems}
       columns={createColumns(showModal, dispatch)}
     />
@@ -103,7 +99,7 @@ const mapState = state => {
   const { currentItems = [], total} = state[TABLE_NAME_SPACE] || {}
   return {
     currentItems,
-    tableLoading: state.loading.effects[`${TABLE_NAME_SPACE}/fetchBasedataModelList`] || false,
+    tableLoading: state.loading.effects[`${TABLE_NAME_SPACE}/fetchList`] || false,
     total
   }
 }

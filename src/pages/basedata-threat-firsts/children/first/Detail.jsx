@@ -4,12 +4,12 @@ import { connect } from 'dva'
 import './index.less'
 import { useEffect } from 'react';
 
-const TABLE_NAME_SPACE = 'VulnerabilityFirstTableView'
+const TABLE_NAME_SPACE = 'BasedataThreatFirstTableView'
 
 const ModalDetail = (props) => {
   const { visible, onCancel, id, form, fetchList, updateItem, createItem, detail, fetchDetail, clearDetail } = props
   const { getFieldDecorator, getFieldsValue,  validateFields } = form
-  const { vulnerability_firsts_name, vulnerability_firsts_code, vulnerability_firsts_desc} = getFieldsValue()
+  const { threat_firsts_code, threat_firsts_name, threat_firsts_desc} = getFieldsValue()
 
   useEffect(() => {
     id ? fetchDetail(id) : clearDetail()
@@ -23,7 +23,7 @@ const ModalDetail = (props) => {
       onCancel()
       fetchList({page: 1, size: 10})
     })
-  }, [ vulnerability_firsts_name, vulnerability_firsts_code, vulnerability_firsts_desc])
+  }, [ threat_firsts_code, threat_firsts_name, threat_firsts_desc])
   
 	const handleCancel = () => {
 		onCancel()
@@ -49,8 +49,8 @@ const ModalDetail = (props) => {
         <Form.Item
           label='威胁名称'
         >
-          {getFieldDecorator('vulnerability_firsts_name', {
-            initialValue: detail.vulnerability_firsts_name,
+          {getFieldDecorator('threat_firsts_name', {
+            initialValue: detail.threat_firsts_name,
             rules: [
               { required: true, message: '请输入威胁名称' }
             ]
@@ -61,8 +61,8 @@ const ModalDetail = (props) => {
         <Form.Item
           label='威胁编号'
         >
-          {getFieldDecorator('vulnerability_firsts_code', {
-            initialValue: detail.vulnerability_firsts_code,
+          {getFieldDecorator('threat_firsts_code', {
+            initialValue: detail.threat_firsts_code,
             rules: [{
               required: true,
               message: '请输入威胁编号',
@@ -74,8 +74,8 @@ const ModalDetail = (props) => {
         <Form.Item
           label="威胁描述"
         >
-          {getFieldDecorator('vulnerability_firsts_desc', {
-            initialValue: detail.vulnerability_firsts_desc,
+          {getFieldDecorator('threat_firsts_desc', {
+            initialValue: detail.threat_firsts_desc,
             rules: [{
               required: true,
               message: '请输入威胁描述',

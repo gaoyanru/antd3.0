@@ -2,13 +2,13 @@ import { Table, Modal } from 'ii-ui'
 import { connect } from 'dva'
 import moment from 'moment'
 
-const TABLE_NAME_SPACE = 'VulnerabilityFirstTableView'
+const TABLE_NAME_SPACE = 'BasedataThreatFirstTableView'
 
 const confirmDelete = ({ dispatch, id }) => Modal.confirm({
   title: '确认删除',
   content: '确认该条数据吗？',
   onOk: async () => {
-    await dispatch({ type: `${TABLE_NAME_SPACE}/updateItem`, payload: {is_deleted: true, vulnerability_firsts_id: id} })
+    await dispatch({ type: `${TABLE_NAME_SPACE}/updateItem`, payload: {is_deleted: true, threat_firsts_id: id} })
     await dispatch({ type: `${TABLE_NAME_SPACE}/fetchList`, payload: {page: 1, size: 10} })
   }
 })
@@ -24,15 +24,15 @@ const createColumns = (showModal, dispatch) => [
 	},
   {
     title: '一级威胁性编号',
-    dataIndex: 'vulnerability_firsts_code'
+    dataIndex: 'threat_firsts_code'
 	},
 	{
     title: '一级威胁性名称',
-    dataIndex: 'vulnerability_firsts_name'
+    dataIndex: 'threat_firsts_name'
   },
   {
     title: '描述',
-    dataIndex: 'vulnerability_firsts_desc'
+    dataIndex: 'threat_firsts_desc'
   },
   {
     title: '创建时间',
@@ -47,7 +47,7 @@ const createColumns = (showModal, dispatch) => [
 		title: '操作',
     key: 'edit',
 		render: (record) => {
-      const { vulnerability_firsts_id: id } = record
+      const { threat_firsts_id: id } = record
 			return (
 				<div className='item-actions'>
           <span className='span-btn' onClick={() => showModal(id)}>编辑</span>
@@ -85,7 +85,7 @@ const ItemTable = (props) => {
     <Table
       pagination={pagination}
       loading={tableLoading}
-      rowKey={record => record.vulnerability_firsts_id}
+      rowKey={record => record.threat_firsts_id}
       dataSource={currentItems}
       columns={createColumns(showModal, dispatch)}
     />
@@ -95,7 +95,7 @@ const mapState = state => {
   const { currentItems = [], total} = state[TABLE_NAME_SPACE] || {}
   return {
     currentItems,
-    tableLoading: state.loading.effects[`${TABLE_NAME_SPACE}/fetchBasedataModelList`] || false,
+    tableLoading: state.loading.effects[`${TABLE_NAME_SPACE}/fetchList`] || false,
     total
   }
 }

@@ -1,6 +1,6 @@
 import * as service from 'src/services/api'
 import { Message } from 'ii-ui'
-const TABLE_NAME_SPACE = 'VulnerabilityFirstTableView'
+const TABLE_NAME_SPACE = 'BasedataThreatFirstTableView'
 
 export default {
   namespace: TABLE_NAME_SPACE,
@@ -26,12 +26,12 @@ export default {
   },
   effects: {
     *fetchList({ payload: { page = 1, size = 20, keywords = '' }}, { call, put }) {
-      const modelsList = yield call(service.fetchVulnerabilityFirstList, { page, size, keywords })
+      const modelsList = yield call(service.fetchBasedataThreatFirstList, { page, size, keywords })
       const { totalCount, datas: currentItems = [] } = modelsList || {}
       yield put({ type: 'setModelsList', payload: { total: totalCount, currentItems }})
     },
     *fetchDetail({ payload: id }, {call, put}) {
-      const detail = yield call(service.fetchVulnerabilityFirstDetail, id)
+      const detail = yield call(service.fetchBasedataThreatFirstDetail, id)
       yield put({ type: 'setDetail', payload: { detail }})
     },
     *clearDetail(_, {call, put}) {
@@ -39,11 +39,11 @@ export default {
       yield put({ type: 'setDetail', payload: { detail }})
     },
     *createItem({payload}, { call, put }) {
-      yield call(service.addVulnerabilityFirst, payload)
+      yield call(service.addBasedataThreatFirst, payload)
       Message.success('操作成功')
     },
     *updateItem({payload}, { call, put }) {
-      yield call(service.updateVulnerabilityFirst, payload)
+      yield call(service.updateBasedataThreatFirst, payload)
       Message.success('操作成功')
     }
   }
