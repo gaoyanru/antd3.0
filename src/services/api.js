@@ -37,21 +37,34 @@ export const updateVulnerabilitySecond = (params) => request.put('/ra-basedata-v
 // 二级脆弱性详情获取
 export const fetchVulnerabilitySecondDetail = ({id}) => request.get(`/ra-basedata-vulnerability-seconds/${id}`)
 
-// 一级脆弱性列表页
+// 一级威胁性列表页
 export const fetchBasedataThreatFirstList = ({keywords, page, size}) => request.get(`/ra-basedata-threat-firsts?keywords=${keywords}&page=${page}&size=${size}`)
-// 一级脆弱性新增
+// 一级威胁性新增
 export const addBasedataThreatFirst = (params) => request.post(`/ra-basedata-threat-firsts`, params)
-// 一级脆弱性修改及删除
+// 一级威胁性修改及删除
 export const updateBasedataThreatFirst = (params) => request.put('/ra-basedata-threat-firsts', params)
-// 一级脆弱性详情获取
+// 一级威胁性详情获取
 export const fetchBasedataThreatFirstDetail = ({id}) => request.get(`/ra-basedata-threat-firsts/${id}`)
-// 二级级脆弱性列表页
+// 二级级威胁性列表页
 export const fetchBasedataThreatSecondList = ({keywords, page, size, threadFirstsId}) => request.get(`/ra-basedata-threat-seconds?keywords=${keywords}&page=${page}&size=${size}&threadFirstsId=${threadFirstsId}`)
-// 二级脆弱性新增
+// 二级威胁性新增
 export const addBasedataThreatSecond = (params) => request.post(`/ra-basedata-threat-seconds`, params)
-// 二级脆弱性修改及删除
+// 二级威胁性修改及删除
 export const updateBasedataThreatSecond = (params) => request.put('/ra-basedata-threat-seconds', params)
-// 二级脆弱性详情获取
+// 二级威胁性详情获取
 export const fetchBasedataThreatSecondDetail = ({id}) => request.get(`/ra-basedata-threat-seconds/${id}`)
 // 二级威胁性新增获取安全分类
 export const fetchThreattypeList = ({keywords, page, size}) => request.get(`/ra-basedata-threat-type?keywords=${keywords}&page=${page}&size=${size}`)
+
+// 资产列表页
+export const fetchBasedataAssetsList = ({keywords, page, size, assetFirstsId, assetSecondsId}) => request.get(`/ra-basedata-assets?keywords=${keywords}&page=${page}&size=${size}&assetFirstsId=${assetFirstsId}&assetSecondsId=${assetSecondsId}`)
+// 资产查询条件一级类别
+export const fetchFirstlevelList = ({keywords, page, size}) => request.get(`/ra-basedata-asset-firsts?keywords=${keywords}&page=${page}&size=${size}`)
+// 资产查询条件二级类别
+export const fetchSecondlevelList = ({keywords, page, size}) => request.get(`/ra-basedata-asset-seconds?keywords=${keywords}&page=${page}&size=${size}`)
+// 资产新增
+export const addBasedataAssets = (params) => request.post(`/ra-basedata-assets`, params)
+// 资产修改及删除
+export const updateBasedataAssets = (params) => request.put('/ra-basedata-assets', params)
+// 资产详情获取
+export const fetchBasedataAssetsDetail = ({id}) => request.get(`/ra-basedata-assets/${id}`)

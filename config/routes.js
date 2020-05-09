@@ -90,6 +90,19 @@ const routes = [{
           path: '/basedata-threat-firsts/list/:type?',
           component: './basedata-threat-firsts/children'
         }]
+      }, {
+        path: '/basedata-assets',
+        icon: 'iconshunxu',
+        name: '资产库',
+        isMenuItem: true,
+        routes: [{
+          path: '/basedata-assets',
+          redirect: '/basedata-assets/list',
+          exact: true
+        }, {
+          path: '/basedata-assets/list',
+          component: './basedata-assets/children'
+        }]
       }
     ]
   },
