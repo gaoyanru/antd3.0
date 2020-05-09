@@ -1,4 +1,4 @@
- import { Modal, Form, Input, Select } from 'ii-ui'
+import { Modal, Form, Input, Select } from 'ii-ui'
 import { useDebounce } from 'ii-utils/react-helper'
 import { connect } from 'dva'
 import './index.less'

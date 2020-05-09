@@ -74,6 +74,22 @@ const routes = [{
           path: '/basedata-vulnerability/list/:type?',
           component: './basedata-vulnerability/children'
         }]
+      }, {
+        path: '/basedata-threat-firsts',
+        icon: 'iconshunxu',
+        name: '威胁性场景库',
+        isMenuItem: true,
+        routes: [{
+          path: '/basedata-threat-firsts',
+          redirect: '/basedata-threat-firsts/list',
+          exact: true
+        }, {
+          path: '/basedata-threat-firsts/list',
+          component: './basedata-threat-firsts/children'
+        }, {
+          path: '/basedata-threat-firsts/list/:type?',
+          component: './basedata-threat-firsts/children'
+        }]
       }
     ]
   },

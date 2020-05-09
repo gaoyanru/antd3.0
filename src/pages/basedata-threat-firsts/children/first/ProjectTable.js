@@ -23,11 +23,11 @@ const createColumns = (showModal, dispatch) => [
     }
 	},
   {
-    title: '一级脆弱性编号',
+    title: '一级威胁性编号',
     dataIndex: 'vulnerability_firsts_code'
 	},
 	{
-    title: '一级脆弱性名称',
+    title: '一级威胁性名称',
     dataIndex: 'vulnerability_firsts_name'
   },
   {
