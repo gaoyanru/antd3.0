@@ -4,11 +4,11 @@ import moment from 'moment'
 
 const TABLE_NAME_SPACE = 'BasedataThreatSecondTableView'
 
-const confirmDelete = ({ dispatch, id, threat_type_id }) => Modal.confirm({
+const confirmDelete = ({ dispatch, id, threat_type_id, threat_firsts_id }) => Modal.confirm({
   title: '确认删除',
   content: '确认该条数据吗？',
   onOk: async () => {
-    await dispatch({ type: `${TABLE_NAME_SPACE}/updateItem`, payload: {is_deleted: true, threat_seconds_id: id, threat_type_id} })
+    await dispatch({ type: `${TABLE_NAME_SPACE}/updateItem`, payload: {is_deleted: true, threat_seconds_id: id, threat_type_id, threat_firsts_id} })
     await dispatch({ type: `${TABLE_NAME_SPACE}/fetchList`, payload: {page: 1, size: 10} })
   }
 })
@@ -51,11 +51,11 @@ const createColumns = (showModal, dispatch) => [
 		title: '操作',
     key: 'edit',
 		render: (record) => {
-      const { threat_seconds_id: id, threat_type_id } = record
+      const { threat_seconds_id: id, threat_type_id, threat_firsts_id } = record
 			return (
 				<div className='item-actions'>
           <span className='span-btn' onClick={() => showModal(id)}>编辑</span>
-          <span className='span-btn' onClick={() => confirmDelete({dispatch, id, threat_type_id})}>删除</span>
+          <span className='span-btn' onClick={() => confirmDelete({dispatch, id, threat_type_id, threat_firsts_id})}>删除</span>
         </div>
 			)
 		}

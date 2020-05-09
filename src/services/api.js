@@ -53,3 +53,5 @@ export const addBasedataThreatSecond = (params) => request.post(`/ra-basedata-th
 export const updateBasedataThreatSecond = (params) => request.put('/ra-basedata-threat-seconds', params)
 // 二级脆弱性详情获取
 export const fetchBasedataThreatSecondDetail = ({id}) => request.get(`/ra-basedata-threat-seconds/${id}`)
+// 二级威胁性新增获取安全分类
+export const fetchThreattypeList = ({keywords, page, size}) => request.get(`/ra-basedata-threat-type?keywords=${keywords}&page=${page}&size=${size}`)

@@ -7,30 +7,30 @@ import { useEffect } from 'react';
 const TABLE_NAME_SPACE = 'BasedataThreatSecondTableView'
 
 const ModalDetail = (props) => {
-  const { visible, onCancel, id, form, fetchList, updateItem, createItem, detail, fetchDetail, clearDetail, firstList = [] } = props
+  const { visible, onCancel, id, form, fetchList, updateItem, createItem, detail, fetchDetail, clearDetail, firstList = [], threatTypes = [], fetchThreattypeList } = props
   const { getFieldDecorator, getFieldsValue,  validateFields } = form
-  const { threat_seconds_name, threat_seconds_code, threat_firsts_id, threat_seconds_desc } = getFieldsValue()
+  const { threat_seconds_name, threat_seconds_code, threat_firsts_id, threat_seconds_desc, threat_type_id } = getFieldsValue()
 
   useEffect(() => {
     id ? fetchDetail(id) : clearDetail()
   }, [id])
-  // useEffect(() => {
-  //   fetchListFirst({page: 1, size: 100})
-  // }, [])
+  useEffect(() => {
+    fetchThreattypeList({page: 1, size: 100})
+  }, [])
   const onSubmit = useDebounce(() => {
     validateFields(async (error, values) => {
       console.log(values, 'values')
       if (error) return
-      id ? await updateItem ({ vulnerability_seconds_id: id, is_deleted: false, ...values }) : await createItem ({ ...values })
+      id ? await updateItem ({ threat_seconds_id: id, is_deleted: false, ...values }) : await createItem ({ ...values })
       onCancel()
       fetchList({page: 1, size: 10})
     })
-  }, [ threat_seconds_name, threat_seconds_code, threat_firsts_id, threat_seconds_desc])
+  }, [ threat_seconds_name, threat_seconds_code, threat_firsts_id, threat_seconds_desc, threat_firsts_id, threat_type_id])
   
 	const handleCancel = () => {
 		onCancel()
   }
-  console.log(firstList, 'firstList')
+  console.log(threatTypes, 'threatTypes')
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -77,8 +77,8 @@ const ModalDetail = (props) => {
         <Form.Item
           label='一级威胁性'
         >
-          {getFieldDecorator('threat_type_id', {
-            initialValue: detail.threat_type_id,
+          {getFieldDecorator('threat_firsts_id', {
+            initialValue: detail.threat_firsts_id,
             rules: [{
               required: true,
               message: '请选择一级威胁性',
@@ -89,6 +89,28 @@ const ModalDetail = (props) => {
                 firstList.length > 0 && firstList.map((item) => {
                   return (
                     <Select.Option key={item.threat_firsts_id} value={item.threat_firsts_id}>{item.threat_firsts_name}</Select.Option>
+                  )
+                })
+              }
+              
+            </Select>
+          )}
+        </Form.Item>
+        <Form.Item
+          label='威胁分类'
+        >
+          {getFieldDecorator('threat_type_id', {
+            initialValue: detail.threat_type_id,
+            rules: [{
+              required: true,
+              message: '请选择威胁分类',
+            }]
+          })(
+            <Select placeholder='请选择威胁分类'>
+              {
+                threatTypes.length > 0 && threatTypes.map((item) => {
+                  return (
+                    <Select.Option key={item.threat_type_id} value={item.threat_type_id}>{item.threat_type_name}</Select.Option>
                   )
                 })
               }
@@ -118,10 +140,11 @@ const ModalDetail = (props) => {
 }
 
 const mapState = (state, ownProps) => {
-  const { detail, firstList } = state[TABLE_NAME_SPACE] || {}
+  const { detail, firstList, threatTypes } = state[TABLE_NAME_SPACE] || {}
   return ({
     detail,
-    firstList
+    firstList,
+    threatTypes
   })
 }
 
@@ -131,7 +154,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     createItem: payload => dispatch({ type: `${TABLE_NAME_SPACE}/createItem`, payload }),
     updateItem: payload => dispatch({ type: `${TABLE_NAME_SPACE}/updateItem`, payload }),
     clearDetail: () => dispatch({ type: `${TABLE_NAME_SPACE}/clearDetail`}),
-    fetchList: (params = {}) => dispatch({ type: `${TABLE_NAME_SPACE}/fetchList`, payload: params })
+    fetchList: (params = {}) => dispatch({ type: `${TABLE_NAME_SPACE}/fetchList`, payload: params }),
+    fetchThreattypeList: (params = {}) => dispatch({ type: `${TABLE_NAME_SPACE}/fetchThreattypeList`, payload: params }),
   }
 }
 export default connect(mapState, mapDispatchToProps)(Form.create()(ModalDetail))

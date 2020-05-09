@@ -9,7 +9,8 @@ export default {
     currentItems: [],
     detail: {},
     firstList: [],
-    allFirstList: []
+    allFirstList: [],
+    threatTypes: []
   },
   reducers: {
     setModelsList(state, { payload: { total, currentItems }}) {
@@ -31,7 +32,13 @@ export default {
         firstList,
         allFirstList
       }
-    }
+    },
+    setThreatTypes(state, { payload: { threatTypes }}) {
+      return {
+        ...state,
+        threatTypes
+      }
+    },
   },
   effects: {
     *fetchList({ payload: { page = 1, size = 20, keywords = '', threadFirstsId = '' }}, { call, put }) {
@@ -44,6 +51,11 @@ export default {
       const { datas: firstList = [] } = modelsList || {}
       const allFirstList = [{threat_firsts_id: '', threat_firsts_name: '全部'}].concat(firstList)
       yield put({ type: 'setFirstList', payload: { firstList, allFirstList }})
+    },
+    *fetchThreattypeList({ payload: { page = 1, size = 20, keywords = ''}}, { call, put }) {
+      const modelsList = yield call(service.fetchThreattypeList, { page, size, keywords})
+      const { datas: threatTypes = [] } = modelsList || {}
+      yield put({ type: 'setThreatTypes', payload: { threatTypes }})
     },
     *fetchDetail({ payload: id }, {call, put}) {
       const detail = yield call(service.fetchBasedataThreatSecondDetail, id)
