@@ -27,6 +27,16 @@ const ModalDetail = (props) => {
 	const handleCancel = () => {
 		onCancel()
   }
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 6 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 18 },
+    },
+  };
   return (
 		<Modal
 			title={ !id ? '添加测试用例' : '修改测试用例' }
@@ -34,44 +44,45 @@ const ModalDetail = (props) => {
 			onOk={onSubmit}
       onCancel={handleCancel}
 		>
-			<Form className="project-editor-container">
+			<Form {...formItemLayout} className="project-editor-container">
         <Form.Item
-          label='名称'
+          label='测试用例名称'
         >
           {getFieldDecorator('attack_test_case_name', {
             initialValue: detail.attack_test_case_name,
             rules: [
-              { required: true, message: '输入名称' }
+              { required: true, message: '请输入测试用例名称' }
             ]
           })(
-            <Input/>
+            <Input placeholder='请输入测试用例名称'/>
           )}
         </Form.Item>
         <Form.Item
-          label='编号'
+          label='测试用例编号'
         >
           {getFieldDecorator('attack_test_case_code', {
             initialValue: detail.attack_test_case_code,
             rules: [{
               required: true,
-              message: '请输入编号',
+              message: '请输入测试用例编号',
             }]
           })(
-            <Input/>
+            <Input placeholder='请输入测试用例编号'/>
           )}
         </Form.Item>
         <Form.Item
-          label="步骤"
+          label="测试用例步骤"
         >
           {getFieldDecorator('attack_test_case_steps', {
             initialValue: detail.attack_test_case_steps,
             rules: [{
               required: true,
-              message: '请输入步骤',
+              message: '请输入测试用例步骤',
             }]
           })(
             <Input.TextArea
               rows={5}
+              placeholder='请输入测试用例步骤'
             />
           )}
         </Form.Item>

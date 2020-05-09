@@ -1,5 +1,6 @@
 import { Table, Modal } from 'ii-ui'
 import { connect } from 'dva'
+import moment from 'moment'
 
 const TABLE_NAME_SPACE = 'riskModelTableView'
 
@@ -26,7 +27,12 @@ const createColumns = () => [
   },
   {
     title: '创建时间',
-    dataIndex: 'description2'
+    dataIndex: 'create_time',
+    render: (text) => {
+      return (
+        <span>{moment(text).format('YYYY-MM-DD HH:mm:ss')}</span>
+      )
+    }
 	},
 	{
 		title: '操作',
@@ -62,6 +68,7 @@ const ItemTable = (props) => {
       console.log(size, 'size')
       fetchList({ page: 1, size })
     },
+    showTotal: (total, range) => `总共 ${total} 条`,
     showSizeChanger: true,
     showQuickJumper: true,
     pageSizeOptions,

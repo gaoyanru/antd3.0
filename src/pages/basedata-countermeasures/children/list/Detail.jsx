@@ -28,6 +28,16 @@ const ModalDetail = (props) => {
 	const handleCancel = () => {
 		onCancel()
   }
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 6 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 18 },
+    },
+  };
   return (
 		<Modal
 			title={ !id ? '添加缓解措施' : '修改缓解措施' }
@@ -35,44 +45,45 @@ const ModalDetail = (props) => {
 			onOk={onSubmit}
       onCancel={handleCancel}
 		>
-			<Form className="project-editor-container">
+			<Form {...formItemLayout} className="project-editor-container">
         <Form.Item
-          label='名称'
+          label='缓解措施名称'
         >
           {getFieldDecorator('countermeasure_name', {
             initialValue: detail.countermeasure_name,
             rules: [
-              { required: true, message: '输入名称' }
+              { required: true, message: '请输入缓解措施名称' }
             ]
           })(
-            <Input/>
+            <Input placeholder='请输入缓解措施名称'/>
           )}
         </Form.Item>
         <Form.Item
-          label='编号'
+          label='缓解措施编号'
         >
           {getFieldDecorator('countermeasure_code', {
             initialValue: detail.countermeasure_code,
             rules: [{
               required: true,
-              message: '请输入编号',
+              message: '请输入缓解措施编号',
             }]
           })(
-            <Input/>
+            <Input placeholder='请输入缓解措施编号'/>
           )}
         </Form.Item>
         <Form.Item
-          label="描述"
+          label="缓解措施描述"
         >
           {getFieldDecorator('countermeasure_desc', {
             initialValue: detail.countermeasure_desc,
             rules: [{
               required: true,
-              message: '请输入描述',
+              message: '请输入缓解措施描述',
             }]
           })(
             <Input.TextArea
               rows={5}
+              placeholder='请输入缓解措施描述'
             />
           )}
         </Form.Item>
