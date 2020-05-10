@@ -68,3 +68,11 @@ export const addBasedataAssets = (params) => request.post(`/ra-basedata-assets`,
 export const updateBasedataAssets = (params) => request.put('/ra-basedata-assets', params)
 // 资产详情获取
 export const fetchBasedataAssetsDetail = ({id}) => request.get(`/ra-basedata-assets/${id}`)
+// 资产一级类别新增
+export const addBasedataAssetFirsts = (params) => request.post(`/ra-basedata-asset-firsts`, params)
+// 资产一级类别修改及删除
+export const updateBasedataAssetFirsts = (params) => request.put('/ra-basedata-asset-firsts', params)
+// 资二级类别新增
+export const addBasedataAssetSecond = (params) => request.post(`/ra-basedata-asset-seconds`, params)
+// 资二级类别修改及删除
+export const updateBasedataAssetSecond = (params) => request.put('/ra-basedata-asset-seconds', params)

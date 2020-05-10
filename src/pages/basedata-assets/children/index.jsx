@@ -3,19 +3,22 @@ import { Select, Input, Button } from 'ii-ui'
 import { connect } from 'dva'
 import ProjectTable from './ProjectTable'
 import Detail from './Detail'
+import CategoryModel from './CategoryModel'
+
 import './index.less'
 
 const { Search } = Input
 const TABLE_NAME_SPACE = 'BasedataAssetsTableView'
 
 const BasedataAssetsList = (props) => {
-  const { fetchList, firstlevelList = [], secondlevelList = [], fetchFirstlevelList, fetchSecondlevelList} = props
+  const { fetchList, firstAlllevelList = [], secondAlllevelList = [], fetchFirstlevelList, fetchSecondlevelList} = props
   const [keywords, setKeywords] = useState()
   const [params, setParams] = useState({page: 1, size: 10})
   const [firstId, setFirstId] = useState()
   const [secondId, setSecondId] = useState()
   const [visible, setVisible] = useState(false)
   const [currentId, setCurrentId] = useState()
+  const [visibleCategory, setVisibleCategory] = useState(false)
 
   useEffect(() => {
     fetchFirstlevelList({page:1, size: 100})
@@ -37,7 +40,7 @@ const BasedataAssetsList = (props) => {
             />
             <Select placeholder='一级类别' onChange={value => setFirstId(value)} style={{ width: 200, marginLeft: 10, marginRight: 10 }}>
             {
-              firstlevelList.length > 0 && firstlevelList.map((item) => {
+              firstAlllevelList.length > 0 && firstAlllevelList.map((item) => {
                 return (
                   <Select.Option key={item.asset_firsts_id} value={item.asset_firsts_id}>{item.asset_firsts_name}</Select.Option>
                 )
@@ -46,7 +49,7 @@ const BasedataAssetsList = (props) => {
             </Select>
             <Select placeholder='二级级类别' onChange={value => setSecondId(value)} style={{ width: 200 }}>
               {
-                secondlevelList.length > 0 && secondlevelList.map((item) => {
+                secondAlllevelList.length > 0 && secondAlllevelList.map((item) => {
                   return (
                     <Select.Option key={item.asset_seconds_id} value={item.asset_seconds_id}>{item.asset_seconds_name}</Select.Option>
                   )
@@ -58,7 +61,7 @@ const BasedataAssetsList = (props) => {
             <Button
               className='button-type'
               onClick={() => {
-                
+                setVisibleCategory(true)
               }}
             >
               管理类别
@@ -96,14 +99,21 @@ const BasedataAssetsList = (props) => {
           onCancel={() => setVisible(false)}
         />
       }
+      {
+        visibleCategory &&
+        <CategoryModel
+          visible={visibleCategory}
+          onCancel={() => setVisibleCategory(false)}
+        />
+      }
     </div>
   )
 }
 const mapState = state => {
-  const { firstlevelList, secondlevelList } = state[TABLE_NAME_SPACE] || {}
+  const { firstAlllevelList, secondAlllevelList } = state[TABLE_NAME_SPACE] || {}
   return {
-    firstlevelList,
-    secondlevelList
+    firstAlllevelList,
+    secondAlllevelList
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => ({

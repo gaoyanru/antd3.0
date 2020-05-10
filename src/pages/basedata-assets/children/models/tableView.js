@@ -9,7 +9,9 @@ export default {
     currentItems: [],
     detail: {},
     firstlevelList: [],
-    secondlevelList: []
+    firstAlllevelList: [],
+    secondlevelList: [],
+    secondAlllevelList: []
   },
   reducers: {
     setModelsList(state, { payload: { total, currentItems }}) {
@@ -25,16 +27,18 @@ export default {
         detail
       }
     },
-    setFirstlevelList(state, { payload: { firstlevelList }}) {
+    setFirstlevelList(state, { payload: { firstlevelList, firstAlllevelList }}) {
       return {
         ...state,
-        firstlevelList
+        firstlevelList,
+        firstAlllevelList
       }
     },
-    setSecondlevelList(state, { payload: { secondlevelList }}) {
+    setSecondlevelList(state, { payload: { secondlevelList, secondAlllevelList }}) {
       return {
         ...state,
-        secondlevelList
+        secondlevelList,
+        secondAlllevelList
       }
     },
   },
@@ -47,14 +51,16 @@ export default {
     *fetchFirstlevelList({ payload: { page = 1, size = 20, keywords = '' }}, { call, put }) {
       const modelsList = yield call(service.fetchFirstlevelList, { page, size, keywords })
       const { datas } = modelsList || {}
-      const firstlevelList = [{asset_firsts_name: '全部', asset_firsts_id: ''}].concat(datas)
-      yield put({ type: 'setFirstlevelList', payload: { firstlevelList }})
+      const firstAlllevelList = [{asset_firsts_name: '全部', asset_firsts_id: ''}].concat(datas)
+      const firstlevelList = datas
+      yield put({ type: 'setFirstlevelList', payload: { firstlevelList, firstAlllevelList }})
     },
     *fetchSecondlevelList({ payload: { page = 1, size = 20, keywords = '' }}, { call, put }) {
       const modelsList = yield call(service.fetchSecondlevelList, { page, size, keywords })
       const { datas } = modelsList || {}
-      const secondlevelList = [{asset_seconds_name: '全部', asset_seconds_id: ''}].concat(datas)
-      yield put({ type: 'setSecondlevelList', payload: { secondlevelList }})
+      const secondAlllevelList = [{asset_seconds_name: '全部', asset_seconds_id: ''}].concat(datas)
+      const secondlevelList = datas
+      yield put({ type: 'setSecondlevelList', payload: { secondlevelList, secondAlllevelList }})
     },
     *fetchDetail({ payload: id }, {call, put}) {
       const detail = yield call(service.fetchBasedataAssetsDetail, id)
@@ -71,6 +77,26 @@ export default {
     *updateItem({payload}, { call, put }) {
       yield call(service.updateBasedataAssets, payload)
       Message.success('操作成功')
+    },
+    *createFirstItem({payload}, { call, put }) {
+      const res = yield call(service.addBasedataAssetFirsts, payload)
+      Message.success('操作成功')
+      return res
+    },
+    *updateFirstItem({payload}, { call, put }) {
+      const res = yield call(service.updateBasedataAssetFirsts, payload)
+      Message.success('操作成功')
+      return res
+    },
+    *createSecondItem({payload}, { call, put }) {
+      const res = yield call(service.addBasedataAssetSecond, payload)
+      Message.success('操作成功')
+      return res
+    },
+    *updateSecondItem({payload}, { call, put }) {
+      const res = yield call(service.updateBasedataAssetSecond, payload)
+      Message.success('操作成功')
+      return res
     }
   }
 }
