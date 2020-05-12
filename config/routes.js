@@ -17,7 +17,7 @@ const routes = [{
         redirect: '/account-center/basic-info',
       }, {
         path: '/riskassessment-model-management', // 子路由的第一个路由放置一个重定向，设置默认显示的路由地址
-        icon: 'iconshunxu',
+        icon: 'icon-fengping',
         name: '风评模型管理',
         isMenuItem: true,
         routes: [{
@@ -34,7 +34,7 @@ const routes = [{
         }]
       }, {
         path: '/basedata-countermeasures',
-        icon: 'iconshunxu',
+        icon: 'icon-huanjie',
         name: '缓解措施',
         isMenuItem: true,
         routes: [{
@@ -47,7 +47,7 @@ const routes = [{
         }]
       }, {
         path: '/basedata-attack-test-cases',
-        icon: 'iconshunxu',
+        icon: 'icon-gongjilujing',
         name: '攻击路径库',
         isMenuItem: true,
         routes: [{
@@ -60,7 +60,7 @@ const routes = [{
         }]
       }, {
         path: '/basedata-vulnerability',
-        icon: 'iconshunxu',
+        icon: 'icon-cuiruoxing',
         name: '脆弱性基础库',
         isMenuItem: true,
         routes: [{
@@ -76,7 +76,7 @@ const routes = [{
         }]
       }, {
         path: '/basedata-threat-firsts',
-        icon: 'iconshunxu',
+        icon: 'icon-weixianweixie',
         name: '威胁性场景库',
         isMenuItem: true,
         routes: [{
@@ -92,7 +92,7 @@ const routes = [{
         }]
       }, {
         path: '/basedata-assets',
-        icon: 'iconshunxu',
+        icon: 'icon-zichan',
         name: '资产库',
         isMenuItem: true,
         routes: [{
@@ -102,6 +102,21 @@ const routes = [{
         }, {
           path: '/basedata-assets/list',
           component: './basedata-assets/children'
+        }]
+      }, {
+        path: '/resource-association',
+        icon: 'icon-zichan',
+        name: '资产关联库',
+        isMenuItem: true,
+        routes: [{
+          path: '/resource-association',
+          redirect: '/resource-association/assets-threat/list',
+          exact: true
+        }, {
+          path: '/resource-association/assets-threat/list',
+          name: '资产-威胁关系映射',
+          isMenuItem: true,
+          component: './resource-association/children/assets-threat'
         }]
       }
     ]
